@@ -14,44 +14,6 @@ const fetchHeader = {
     }
 };
 
-function getListTeams() {
-    title.innerHTML = "Daftar Tim Liga Primer Inggris"
-    fetch(teamEndPoin, fetchHeader)
-        .then(response => response.json())
-        .then(resJson => {
-            console.log(resJson.teams);
-            let teams = "";
-            resJson.teams.forEach(team => {
-                teams += `
-                <li class="collection-item avatar">
-                    <img src="${team.crestUrl}" alt="" class="circle">
-                    <span class="title">${team.name}</span>
-                    <p>Berdiri: ${team.founded} <br>
-                       Markas: ${team.venue}
-                    </p>
-                    <a href="#" data-id="${team.id}" class="secondary-content modal-trigger"><i class="material-icons" data-id="${team.id}">info</i></a>
-
-                    
-                </li>
-                `
-            });
-            contents.innerHTML = '<ul class="collection">' + teams + '</ul>';
-
-            const detail = document.querySelectorAll('.secondary-content')
-            detail.forEach(btn =>{
-                btn.onclick = (event) =>{
-                    showDetailInfo(event.target.dataset.id);
-                }
-            })
-        }).catch(err => {
-            console.error(err);
-        })
-}
-
-function showDetailInfo(id) {
-    let url = `${baseUrl}teams/${id}`
-    contents.innerHTML = "haloo " + url
-}
 
 function getListTeams() {
     title.innerHTML = "Daftar Tim Liga Primer Inggris"
@@ -90,7 +52,7 @@ function getListTeams() {
                             Email   &emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;: ${resInfo.email} <br>
                             Club Color   &emsp;&emsp;&nbsp;: ${resInfo.clubColors} <br>
                             </p>`
-                            console.log(resInfo);
+                            // console.log(resInfo);
                             document.getElementById("nama-tim").innerHTML = resInfo.name;
                             document.getElementById("isi-detail").innerHTML = dataModal;
                         })
